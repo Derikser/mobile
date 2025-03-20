@@ -85,6 +85,12 @@ class Deer : Herbivore(40, 3, 20, 10, "🦌") {
     override fun reproduce(location: Location) = reproduceIfPossible(location) { Deer() }
 }
 
+// 🐰 Кролик (Rabbit)
+class Rabbit : Herbivore(30, 2, 50, 3, "🐰") {
+    override fun move(island: Island, x: Int, y: Int) = chooseDirectionAndMove(island, x, y)
+    override fun reproduce(location: Location) = reproduceIfPossible(location) { Rabbit() }
+}
+
 // 🦆 Утка
 class Duck : Herbivore(25, 4, 200, 1, "🦆") {
     override fun eat(location: Location) {
@@ -169,10 +175,11 @@ fun main() {
     val island = Island(5, 5)
 
     island.grid[2][2].animals.add(Wolf())
-    island.grid[3][3].animals.add(Wolf())
     island.grid[3][3].animals.add(Deer())
+    island.grid[3][3].animals.add(Rabbit())
+    island.grid[3][3].animals.add(Rabbit()) // Добавляем пару для размножения
     island.grid[1][1].animals.add(Duck())
-    island.grid[1][1].animals.add(Duck())
+    island.grid[1][1].animals.add(Duck()) // Добавляем пару для уток
     island.grid[4][4].animals.add(Caterpillar())
 
     val simulation = Simulation(island)
